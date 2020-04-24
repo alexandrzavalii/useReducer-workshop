@@ -19,10 +19,8 @@ const loginFormStyle = {
 export const SignUp = ({dispatch}) => {
     const onUserCreate = (e) => {
         e.preventDefault()
-        dispatch({type: actions.PENDING})
-        createUser(e.target.username.value).then(name=>{
-            dispatch({type: actions.LOGEDIN, payload: name})
-        })
+
+        // call createUser with username
     }
     return (
         <div css={loginContainerStyle}>

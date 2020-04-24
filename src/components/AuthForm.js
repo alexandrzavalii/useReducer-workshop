@@ -2,13 +2,11 @@ import React, {useReducer} from 'react';
 import { Login } from "./Login";
 import {Loading} from "./Loading";
 import {WelcomeScreen} from "./WelcomeScreen";
-import {SignUp} from "./SignUp";
 
 export const actions = {
     PENDING: "PENDING",
     LOGIN: "LOGIN",
     LOGEDOUT: "LOGEDOUT",
-    SIGNUP: "SIGNUP",
     LOGEDIN: "LOGEDIN",
 }
 
@@ -28,9 +26,6 @@ function authReducer(state, action) {
         case actions.LOGEDOUT: {
             return {isLoading: false, userName: undefined}
         }
-        case actions.SIGNUP: {
-            return {screen: 'signup'}
-        }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
@@ -40,8 +35,7 @@ function authReducer(state, action) {
 export const AuthForm = () => {
     const [state,dispatch] = useReducer(authReducer,initialState)
     if(state.isLoading) return <Loading/>
-    if(state.userName) return <WelcomeScreen userName={state.userName} handleLogOut={()=>dispatch({type: actions.LOGEDOUT})}/>
+    if(state.userName) return <WelcomeScreen userName={state.userName} handleLogOut={()=>null}/>
 
-    if(state.screen === 'signup') return <SignUp dispatch={dispatch}/>
     return <Login dispatch={dispatch}/>
 }
